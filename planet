@@ -1,0 +1,19 @@
+# Function to calculate the square of the side length of a square region on a planet
+def calculate_square_area(side_length_km):
+    """
+    Calculate the area of a square region on the surface of a planet.
+
+    Parameters:
+    side_length_km (float): The side length of the square region in kilometers.
+
+    Returns:
+    float: The area of the square region in square kilometers.
+    """
+    # Calculate the area of the square
+    square_area_km2 = side_length_km ** 2
+    return square_area_km2
+
+# Example usage:
+side_length = 10  # Example side length in kilometers
+square_area = calculate_square_area(side_length)
+print(f"The area of the square region is {square_area} square kilometers.")
