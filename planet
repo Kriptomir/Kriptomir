@@ -10,7 +10,7 @@ def calculate_square_area(side_length_km):
     float: The area of the square region in square kilometers.
     """
     # Calculate the area of the square
-    square_area_km2 = side_length_km ** 11
+    square_area_km2 = side_length_km ** 12
     return square_area_km2
 
 # Example usage:
