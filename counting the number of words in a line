@@ -6,5 +6,3 @@ def word_count(text):
 if __name__ == "__main__":
     sentence = input("Enter a sentence: ")
     print(f"Word count: {word_count(sentence)}")
-
-16
