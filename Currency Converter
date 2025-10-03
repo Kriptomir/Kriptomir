@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body { font-family: Arial; max-width: 400px; margin: 50px auto; padding: 20px; }
+        .container { background: #f0f8ff; padding: 20px; border-radius: 10px; }
+        input, select, button { padding: 10px; margin: 5px; width: 100%; box-sizing: border-box; }
+        .result { font-size: 20px; margin: 20px 0; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <input type="number" id="amount" placeholder="Enter amount" value="100">
+        
+        <select id="fromCurrency">
+            <option value="USD">US Dollar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="GBP">British Pound (GBP)</option>
+        </select>
+        
+        <select id="toCurrency">
+            <option value="EUR">Euro (EUR)</option>
+            <option value="USD">US Dollar (USD)</option>
+            <option value="GBP">British Pound (GBP)</option>
+        </select>
+        
+        <button onclick="convertCurrency()">Convert</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Фиксированные курсы (для примера)
+        const exchangeRates = {
+            USD: { EUR: 0.85, GBP: 0.73, USD: 1 },
+            EUR: { USD: 1.18, GBP: 0.86, EUR: 1 },
+            GBP: { USD: 1.37, EUR: 1.16, GBP: 1 }
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('fromCurrency').value;
+            const to = document.getElementById('toCurrency').value;
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
+            const rate = exchangeRates[from][to];
+            const result = amount * rate;
+            
+            document.getElementById('result').innerHTML = 
+                `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+        }
+    </script>
+</body>
+</html>
