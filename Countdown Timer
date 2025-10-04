@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin: 50px; }
+        .timer { font-size: 48px; margin: 20px; color: #2c3e50; }
+        input, button { padding: 10px; margin: 5px; }
+        .controls { margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Countdown Timer</h1>
+    
+    <div>
+        <input type="number" id="minutes" placeholder="Minutes" value="1" min="0">
+        <input type="number" id="seconds" placeholder="Seconds" value="0" min="0" max="59">
+    </div>
+    
+    <div class="controls">
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
+    </div>
+    
+    <div class="timer" id="display">01:00</div>
+
+    <script>
+        let totalSeconds = 0;
+        let timerInterval = null;
+
+        function startTimer() {
+            if (timerInterval) return;
+            
+            const minutes = parseInt(document.getElementById('minutes').value) || 0;
+            const seconds = parseInt(document.getElementById('seconds').value) || 0;
+            
+            totalSeconds = minutes * 60 + seconds;
+            
+            if (totalSeconds <= 0) {
+                alert('Please set a valid time');
+                return;
+            }
+            
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        function updateTimer() {
+            if (totalSeconds <= 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                alert('Time is up!');
+                return;
+            }
+            
+            totalSeconds--;
+            displayTime();
+        }
+        
+        function displayTime() {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            document.getElementById('display').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        
+        function resetTimer() {
+            pauseTimer();
+            document.getElementById('minutes').value = 1;
+            document.getElementById('seconds').value = 0;
+            document.getElementById('display').textContent = '01:00';
+        }
+    </script>
+</body>
+</html>
